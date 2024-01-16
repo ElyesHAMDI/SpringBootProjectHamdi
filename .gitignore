@@ -1,0 +1,17 @@
+# Fichiers de configuration
+application.properties
+application.yml
+
+# Répertoires de sortie
+target/
+
+# Fichiers de log
+*.log
+
+# Répertoires de configuration IDE
+.idea/
+.vscode/
+
+# Fichiers temporaires
+.DS_Store
+Thumbs.db
