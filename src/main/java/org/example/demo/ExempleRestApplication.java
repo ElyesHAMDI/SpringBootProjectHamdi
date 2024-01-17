@@ -17,7 +17,7 @@ public class ExempleRestApplication {
 	private static final Logger log = LoggerFactory.getLogger(ExempleRestApplication.class);
 	public static void main(String... args) {
 		ConfigurableApplicationContext context =SpringApplication.run(ExempleRestApplication.class, args);
-		log.info("YOSR ");
+		log.info("YOSR HAMDI");
 	}
 
 }
