@@ -1,17 +1,60 @@
-# Fichiers de configuration
+# ===========================
+# Ignorer les fichiers de configuration sensibles
+# ===========================
 application.properties
 application.yml
+*.env
+.env.local
+.env.development
+.env.production
 
-# Répertoires de sortie
+# ===========================
+# Ignorer les fichiers de compilation et dependances Maven
+# ===========================
 target/
+!target/.gitkeep  # Garder ce dossier si necessaire pour le CI/CD
+mvnw
+mvnw.cmd
+pom.xml.tag
+pom.xml.releaseBackup
+dependency-reduced-pom.xml
+release.properties
 
-# Fichiers de log
+# ===========================
+# Ignorer les fichiers de log
+# ===========================
 *.log
+logs/
+log/
 
-# Répertoires de configuration IDE
+# ===========================
+# Ignorer les fichiers et repertoires specifiques aux IDEs
+# ===========================
 .idea/
 .vscode/
+*.iml
+*.ipr
+*.iws
 
-# Fichiers temporaires
+# ===========================
+# Ignorer les fichiers système
+# ===========================
 .DS_Store
 Thumbs.db
+
+# ===========================
+# Ignorer Docker et Kubernetes (si utilise dans ton CI/CD)
+# ===========================
+docker-compose.override.yml
+.dockerignore
+/var/lib/docker/
+kubectl-*
+
+# ===========================
+# Ignorer les fichiers de build CI/CD specifiques
+# ===========================
+/dist/
+/node_modules/
+/coverage/
+/build/
+
