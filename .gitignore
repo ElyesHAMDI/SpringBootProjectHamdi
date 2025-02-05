@@ -19,6 +19,7 @@ pom.xml.tag
 pom.xml.releaseBackup
 dependency-reduced-pom.xml
 release.properties
+demo/
 
 # ===========================
 # Ignorer les fichiers de log
