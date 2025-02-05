@@ -31,6 +31,8 @@ log/
 # Ignorer les fichiers et repertoires specifiques aux IDEs
 # ===========================
 .idea/
+# Exclure les bibliothèques IntelliJ IDEA
+.idea/libraries/
 .vscode/
 *.iml
 *.ipr
