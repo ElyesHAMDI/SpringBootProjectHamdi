@@ -21,8 +21,8 @@ public class LoadDatabase {
     CommandLineRunner initDatabase(EmployeeAdapterRepository repository) {
 
         return args -> {
-            for (EmployeeDto employeeDto : Arrays.asList(new EmployeeDto("Bilbo Baggins", "admin"), new EmployeeDto("Frodo Baggins", "user"))) {
-                log.info("Preloading " + repository.save(employeeDto));
+            for (EmployeeDto employeeDto : Arrays.asList(new EmployeeDto("Bilbo Baggins", "ADMIN"), new EmployeeDto("Frodo Baggins", "USER"))) {
+                log.info("Liso " + repository.save(employeeDto));
             }
         };
     }

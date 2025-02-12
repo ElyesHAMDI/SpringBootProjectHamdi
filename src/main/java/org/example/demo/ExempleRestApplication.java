@@ -6,7 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
+
+@EnableFeignClients
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class ExempleRestApplication {
 

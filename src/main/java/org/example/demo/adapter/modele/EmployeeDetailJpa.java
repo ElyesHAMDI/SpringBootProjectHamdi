@@ -1,6 +1,6 @@
 package org.example.demo.adapter.modele;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class EmployeeDetailJpa {

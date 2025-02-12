@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.example.demo.core.domain.entities.EmployeeDetailDto;
 import org.example.demo.core.domain.entities.EmployeeDto;
 
 import org.example.demo.core.usecase.EmployeeUseCase;
@@ -71,5 +72,43 @@ private EmployeeUseCase employeeUseCase;
   ResponseEntity<EmployeeDto> deleteEmployee(@PathVariable Long id) {
     employeeUseCase.deleteById(id);
     return ResponseEntity.noContent().build();
+  }
+
+  @GetMapping("/employees/details")
+  ResponseEntity<List<EmployeeDetailDto>> getEllEmployeeDetails() {
+    System.out.println("getEllEmployeeDetails ALL=  ");
+    List<EmployeeDetailDto> employees = employeeUseCase.findAllDetail().stream()
+            .map(employee -> new EmployeeDetailDto(employee.getEmail(), employee.getAddress(), employee.getPhone(), employee.getHireDate() ))
+            .collect(Collectors.toList());
+
+    return ResponseEntity.ok(employees);
+  }
+
+  @GetMapping("/employees/details/{employeeId}")
+  public ResponseEntity<EmployeeDetailDto> getEmployeeDetail(@PathVariable Long employeeId) {
+    // Récupérer l'employé et son rôle
+    Optional<EmployeeDto> employee = employeeUseCase.findById(employeeId);
+
+    if (employee.isEmpty()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    }
+
+    String role = employee.get().getRole(); // Récupérer le rôle depuis l'entité Employee
+System.out.println("Role ======"+role);
+    // Vérifier les droits et récupérer les détails
+    return employeeUseCase.findEmplyeeDetailById(employeeId,  role)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
+  }
+
+
+  @PostMapping("/employees/details")
+  public ResponseEntity<EmployeeDetailDto> addNewEmployee(@RequestBody EmployeeDetailDto newEmployeeDetails) {
+    EmployeeDetailDto createdEmployee = employeeUseCase.saveDetails(newEmployeeDetails);
+    System.out.println("employee id=  "+newEmployeeDetails.getId());
+
+    return ResponseEntity
+            .created(URI.create("/employees/" + createdEmployee.getEmail()))
+            .body(createdEmployee);
   }
 }
