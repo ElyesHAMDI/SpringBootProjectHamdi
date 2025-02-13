@@ -61,3 +61,4 @@ kubectl-*
 /coverage/
 /build/
 
+/.idea/
