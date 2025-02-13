@@ -1,0 +1,39 @@
+name: Deploy Lambda Function
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
+      - name: Prepare Lambda Deployment Package
+        run: |
+          mkdir -p lambda-package
+          cp target/*.jar lambda-package/
+          cd lambda-package
+          zip -r lambda.zip .
+
+      - name: Deploy to AWS Lambda
+        uses: aws-actions/aws-lambda-deploy@v1
+        with:
+          function-name: ${{ secrets.LAMBDA_FUNCTION_NAME }}
+          zip-file: lambda-package/lambda.zip
+          aws-region: ${{ secrets.AWS_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
